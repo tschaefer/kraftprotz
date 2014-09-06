@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% load bootstrap3 %}
+
+{% block content %}
+<div class="row last-row">
+{% if user.is_authenticated %}
+	<div class="col-lg-12">
+		<div class="page-header">
+			<h1>403
+				<small>
+					The request was a valid request, but the server is refusing
+					to respond to it.
+				</small>
+			</h1>
+		</div>
+		<p><img src="http://cdn.nyanit.com/nyan2.gif"></p>
+	</div>
+{% else %}
+	<div class="col-sm-offset-4 col-sm-4 col-lg-offset-4 col-lg-4">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title"><i class="fa fa-child"></i> Kraftprotz.
+					<small class="hidden-sm">Keep track of your body.</small>
+				</h4>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+				<div class="col-sm-offset-2 col-sm-8">
+				<form action="{% url 'core_login' %}" method="post" id="login-form">
+					{% csrf_token %}
+					{% bootstrap_form form size='sm' %}
+					{% if next %}
+						<input type="hidden" name="next" value="{{ next }}" />
+					{% endif %}
+					{% buttons %}
+						<button type="submit" class="btn btn-primary btn-sm">
+							Log in
+						</button>
+					{% endbuttons %}
+				</form>
+				</div>
+				</div>
+			</div>
+			<div class="panel-footer">
+			</div>
+		</div>
+	</div>
+{% endif %}
+</div>
+{% endblock %}

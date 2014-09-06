@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block navbar-right %}
+<ul class="nav navbar-nav navbar-right">
+	<li><a href="{% url 'core_logout' %}"><i class="fa fa-power-off"></i> Log out</a>
+</ul>
+{% endblock %}
+
+{% block breadcrumbs %}
+	<div class="page-header page-header-closer hidden-xs">
+		<h1>Swimming</h1>
+	</div>
+	<ol class="breadcrumb">
+		<li><a href="{% url 'core_dashboard' %}">Dashboard</a></li>
+		<li><a href="{% url 'kraftprotz_swimming_list' %}">Swimming</a></li>
+		<li class="active">Detail</li>
+	</ol>
+{% endblock %}
+
+{% block content %}
+<div class="row last-row">
+	<div class="col-sm-6 col-lg-3">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">Swimming</h4>
+			</div>
+			<div class="panel-body">
+				<table class="table table-responsive table-hover">
+					<thead>
+					<tr>
+						<th>Activity</th>
+						<th></th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>Date</td>
+						<td>{{ object.date|date }}</td>
+					</tr>
+					<tr>
+						<td>Distance</td>
+						<td>{{ object.distance }} km</td>
+					<tr>
+					<tr>
+						<td>Time</td>
+						<td>{{ object.duration }}</td>
+					</tr>
+					<tr>
+						<td>Average speed</td>
+						<td>{{ object.average_speed }} km/h</td>
+					</tr>
+					<tr>
+						<td>Average pace</td>
+						<td>{{ object.average_pace }}</td>
+					</tr>
+					<tr>
+						<td>Garmin</td>
+						<td>
+						{% if object.garmin_id %}
+							<a href="{{ object.garmin_url }}">
+							{{ object.garmin_id }}</a>
+						{% else %}
+							-
+						{% endif %}
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="panel-footer">
+				<ul class="list-inline">
+					<li>
+						<a href="{% url 'kraftprotz_swimming_delete' pk=object.pk %}">
+							<i class="fa fa-times"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

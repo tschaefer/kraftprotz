@@ -1,0 +1,305 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block navbar-right %}
+<ul class="nav navbar-nav navbar-right">
+	<li><a href="{% url 'core_logout' %}"><i class="fa fa-power-off"></i> Log out</a>
+</ul>
+{% endblock %}
+
+{% block breadcrumbs %}
+	<div class="page-header page-header-closer hidden-xs">
+		<h1>Dashboard</h1>
+	</div>
+	<ol class="breadcrumb">
+		<li class="active">Dashboard</li>
+	</ol>
+{% endblock %}
+
+{% block content %}
+<div class="row last-row">
+	<div class="col-sm-6 col-lg-3">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">Cycling</h4>
+			</div>
+			<div class="panel-body">
+				<table class="table table-responsive table-hover">
+					<thead>
+					<tr>
+						<th>Total activities</th>
+						<th></th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>Last 7 days</td>
+						<td>
+							<span class="badge">
+							{{ cycling.activities.last_7_days.count }}
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<td>{% now 'F' %}</td>
+						<td>
+							<span class="badge">
+							{{ cycling.activities.month.count }}
+							</span>
+						</td>
+					</tbody>
+				</table>
+				<table class="table table-responsive table-hover">
+					<thead>
+					<tr>
+						<th>Latest activity</th>
+						<th></th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>Date</td>
+					{% if cycling.latest %}
+						<td>
+							<a href="{{ cycling.latest.get_absolute_url }}">
+								{{ cycling.latest.date|date }}
+							</a>
+						</td>
+					{% else %}
+						<td>-</td>
+					{% endif %}
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="panel-footer">
+				<ul class="list-inline">
+					<li>
+						<a href="{% url 'kraftprotz_cycling_list' %}">
+							<i class="fa fa-bars"></i>
+						</a>
+					</li>
+					<li>
+						<a href="{% url "kraftprotz_cycling_create" %}">
+							<i class="fa fa-plus"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-6 col-lg-3">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">Running</h4>
+			</div>
+			<div class="panel-body">
+				<table class="table table-responsive table-hover">
+					<thead>
+					<tr>
+						<th>Total activities</th>
+						<th></th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>Last 7 days</td>
+						<td>
+							<span class="badge">
+							{{ running.activities.last_7_days.count }}
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<td>{% now 'F' %}</td>
+						<td>
+							<span class="badge">
+							{{ running.activities.month.count }}
+							</span>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+				<table class="table table-responsive table-hover">
+					<thead>
+					<tr>
+						<th>Latest activity</th>
+						<th></th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>Date</td>
+					{% if running.latest %}
+						<td>
+							<a href="{{ running.latest.get_absolute_url }}">
+								{{ running.latest.date|date }}
+							</a>
+						</td>
+					{% else %}
+						<td>-</td>
+					{% endif %}
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="panel-footer">
+				<ul class="list-inline">
+					<li>
+						<a href="{% url 'kraftprotz_running_list' %}">
+							<i class="fa fa-bars"></i>
+						</a>
+					</li>
+					<li>
+						<a href="{% url "kraftprotz_running_create" %}">
+							<i class="fa fa-plus"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-6 col-lg-3">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">Swimming</h4>
+			</div>
+			<div class="panel-body">
+				<table class="table table-responsive table-hover">
+					<thead>
+					<tr>
+						<th>Total activities</th>
+						<th></th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>Last 7 days</td>
+						<td>
+							<span class="badge">
+							{{ swimming.activities.last_7_days.count }}
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<td>{% now 'F' %}</td>
+						<td>
+							<span class="badge">
+							{{ swimming.activities.month.count }}
+							</span>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+				<table class="table table-responsive table-hover">
+					<thead>
+					<tr>
+						<th>Latest activity</th>
+						<th></th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>Date</td>
+					{% if swimming.latest %}
+						<td>
+							<a href="{{ swimming.latest.get_absolute_url }}">
+								{{ swimming.latest.date|date }}
+							</a>
+						</td>
+					{% else %}
+						<td>-</td>
+					{% endif %}
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="panel-footer">
+				<ul class="list-inline">
+					<li>
+						<a href="{% url 'kraftprotz_swimming_list' %}">
+							<i class="fa fa-bars"></i>
+						</a>
+					</li>
+					<li>
+						<a href="{% url "kraftprotz_swimming_create" %}">
+							<i class="fa fa-plus"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-6 col-lg-3">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">Workout</h4>
+			</div>
+			<div class="panel-body">
+				<table class="table table-responsive table-hover">
+					<thead>
+					<tr>
+						<th>Total activities</th>
+						<th></th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>Last 7 days</td>
+						<td>
+							<span class="badge">
+							{{ workout.activities.last_7_days.count }}
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<td>{% now 'F' %}</td>
+						<td>
+							<span class="badge">
+							{{ workout.activities.month.count }}
+							</span>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+				<table class="table table-responsive table-hover">
+					<thead>
+					<tr>
+						<th>Latest activity</th>
+						<th></th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>Date</td>
+					{% if workout.latest %}
+						<td>
+							<a href="{{ workout.latest.get_absolute_url }}">
+								{{ workout.latest.date|date }}
+							</a>
+						</td>
+					{% else %}
+						<td>-</td>
+					{% endif %}
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="panel-footer">
+				<ul class="list-inline">
+					<li>
+						<a href="{% url 'kraftprotz_workout_list' %}">
+							<i class="fa fa-bars"></i>
+						</a>
+					</li>
+					<li>
+						<a href="{% url "kraftprotz_workout_create" %}">
+							<i class="fa fa-plus"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
