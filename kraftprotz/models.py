@@ -157,4 +157,4 @@ class Swimming(models.Model):
 		return round(kh, 1)
 
 	def get_absolute_url(self):
-		return reverse('kraftprotz_cycling_detail', args=[str(self.id)])
+		return reverse('kraftprotz_swimming_detail', args=[str(self.id)])
