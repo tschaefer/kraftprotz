@@ -1,6 +1,6 @@
 # Kraftprotz. Keep track of your body.
 
-A [Django[(https://www.djangoproject.com/) based web application to log your
+A [Django](https://www.djangoproject.com/) based web application to log your
 sportive activities.
 
 * Cycling
