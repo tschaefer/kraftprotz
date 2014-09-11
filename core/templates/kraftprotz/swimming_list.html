@@ -98,5 +98,62 @@
 			</div>
 		</div>
 	</div>
+	<div class="col-lg-3">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">Distance Chart</h4>
+			</div>
+			<div class="panel-body">
+				<div id="swimming-distance-chart"></div>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-3">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">Duration Chart</h4>
+			</div>
+			<div class="panel-body">
+				<div id="swimming-duration-chart"></div>
+			</div>
+		</div>
+	</div>
 </div>
+{% endblock %}
+
+{% block script %}
+<script>
+new Morris.Line({
+  element: 'swimming-distance-chart',
+  data: [
+{% for activity in object_list %}
+    { activity: '{{ activity.date|date:"Y-m-d" }}', distance: '{{ activity.distance }}' },
+{% endfor %}
+  ],
+  xkey: 'activity',
+  ykeys: ['distance'],
+  labels: ['Distance'],
+  hideHover: 'true',
+  postUnits: ' km',
+  smooth: 'false',
+  resize: 'true',
+});
+</script>
+<script>
+new Morris.Line({
+  element: 'swimming-duration-chart',
+  data: [
+{% for activity in object_list %}
+    { activity: '{{ activity.date|date:"Y-m-d" }}', duration: '{{ activity.time_in_minutes|floatformat:"0" }}' },
+{% endfor %}
+  ],
+  xkey: 'activity',
+  ykeys: ['duration'],
+  labels: ['Duration'],
+  hideHover: 'true',
+  postUnits: ' min',
+  smooth: 'false',
+  resize: 'true'
+});
+</script>
 {% endblock %}

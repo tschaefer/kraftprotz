@@ -91,5 +91,38 @@
 			</div>
 		</div>
 	</div>
+	<div class="col-lg-3">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">Exercise Chart</h4>
+			</div>
+			<div class="panel-body">
+				<div id="workout-exercise-chart"></div>
+			</div>
+		</div>
+	</div>
 </div>
+{% endblock %}
+
+{% block script %}
+<script>
+new Morris.Bar({
+  element: 'workout-exercise-chart',
+  data: [
+{% for activity in object_list %}
+	{ 'activity': '{{ activity.date|date:"Y-m-d" }}',
+	{% for key, value in activity.get_repeats_sum.items %}
+		'{% cycle 'a' 'b' 'c' as label %}': '{{ value }}',
+	{% endfor %}
+	},
+{% endfor %}
+  ],
+  xkey: 'activity',
+  ykeys: ['a', 'b', 'c'],
+  labels: ['1st Exercise', '2nd Exercise', '3rd Exercise'],
+  hideHover: 'true',
+  smooth: 'false',
+  resize: 'true',
+});
+</script>
 {% endblock %}

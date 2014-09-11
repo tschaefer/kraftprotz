@@ -70,6 +70,10 @@ class Running(models.Model):
 		return timedelta(seconds=self.time)
 
 	@property
+	def time_in_minutes(self):
+		return self.time / 60
+
+	@property
 	def garmin_url(self):
 		return GARMIN_BASE_URL + str(self.garmin_id)
 
@@ -103,6 +107,10 @@ class Cycling(models.Model):
 	@property
 	def duration(self):
 		return timedelta(seconds=self.time)
+
+	@property
+	def time_in_minutes(self):
+		return self.time / 60
 
 	@property
 	def garmin_url(self):
@@ -139,6 +147,10 @@ class Swimming(models.Model):
 	@property
 	def duration(self):
 		return timedelta(seconds=self.time)
+
+	@property
+	def time_in_minutes(self):
+		return self.time / 60
 
 	@property
 	def garmin_url(self):
