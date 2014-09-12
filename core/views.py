@@ -13,7 +13,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.generic import View, TemplateView
 
-from kraftprotz.models import Cycling, Running
+from kraftprotz.models import Cycling, Running, Swimming
 from kraftprotz.models import Workout, WorkoutUnit, WorkoutExercise
 from kraftprotz.utils import LoginRequiredMixin
 
@@ -89,6 +89,19 @@ class CoreDashboard(LoginRequiredMixin, TemplateView):
 		except Running.DoesNotExist:
 			latest = None
 		context['running'] = {
+			'latest': latest,
+			'activities': {
+				'last_7_days': obj.filter(date__range=(back_7_days, today)),
+				'month': obj.filter(date__month=today.month),
+			},
+		}
+
+		obj = Swimming.objects.filter(athlete=self.request.user)
+		try:
+			latest = obj.latest()
+		except Swimming.DoesNotExist:
+			latest = None
+		context['swimming'] = {
 			'latest': latest,
 			'activities': {
 				'last_7_days': obj.filter(date__range=(back_7_days, today)),
