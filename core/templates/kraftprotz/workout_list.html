@@ -17,6 +17,31 @@
 {% endblock %}
 
 {% block content %}
+{% if not object_list %}
+<div class="row last-row">
+	<div class="col-sm-6 col-lg-3">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4 class="panel-title">Workout</h4>
+			</div>
+			<div class="panel-body">
+				<p>
+					No activity found.
+				</p>
+			</div>
+			<div class="panel-footer">
+				<ul class="list-inline">
+					<li>
+						<a href="{% url 'kraftprotz_workout_create' %}">
+							<i class="fa fa-plus"></i>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+{% else %}
 <div class="row last-row">
 	<div class="col-sm-12 col-lg-6">
 		<div class="panel panel-default">
@@ -57,28 +82,6 @@
 					{% endfor %}
 					</tbody>
 				</table>
-			{% if is_paginated %}
-				<ul class="list-inline pull-right">
-					{% if page_obj.has_previous %}
-						<li>
-							<a href="{% url 'kraftprotz_workout_list' %}?page={{ page_obj.previous_page_number }}">
-								Prev
-							</a>
-						</li>
-					{% else %}
-						<li>Prev</li>
-					{% endif %}
-					{% if page_obj.has_next %}
-						<li>
-							<a href="{% url 'kraftprotz_workout_list' %}?page={{ page_obj.next_page_number }}">
-								Next
-							</a>
-						</li>
-					{% else %}
-						<li>Next</li>
-					{% endif %}
-				</ul>
-			{% endif %}
 			</div>
 			<div class="panel-footer">
 				<ul class="list-inline">
@@ -87,6 +90,30 @@
 							<i class="fa fa-plus"></i>
 						</a>
 					</li>
+				{% if is_paginated %}
+					<li class="pull-right">
+					<ul class="list-inline">
+						{% if page_obj.has_previous %}
+							<li>
+								<a href="{% url 'kraftprotz_workout_list' %}?page={{ page_obj.previous_page_number }}">
+									<i class="fa fa-chevron-left"></i>
+								</a>
+							</li>
+						{% else %}
+							<li><i class="fa fa-chevron-left"></i></li>
+						{% endif %}
+						{% if page_obj.has_next %}
+							<li>
+								<a href="{% url 'kraftprotz_workout_list' %}?page={{ page_obj.next_page_number }}">
+									<i class="fa fa-chevron-right"></i>
+								</a>
+							</li>
+						{% else %}
+							<li><i class="fa fa-chevron-right"></i></li>
+						{% endif %}
+						</li>
+					</ul>
+				{% endif %}
 				</ul>
 			</div>
 		</div>
@@ -102,6 +129,7 @@
 		</div>
 	</div>
 </div>
+{% endif %}
 {% endblock %}
 
 {% block script %}
